@@ -643,7 +643,7 @@ void x_draw_decoration(Con *con) {
     struct Window *win = con->window;
 
     const int deco_width = (int)con->deco_rect.width;
-    const int title_padding = logical_px(2);
+    const int title_padding = logical_px(8);
 
     int mark_width = 0;
     if (config.show_marks && !TAILQ_EMPTY(&(con->marks_head))) {

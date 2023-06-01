@@ -25,7 +25,7 @@ static void render_con_dockarea(Con *con, Con *child, render_params *p);
  * Returns the height for the decorations
  */
 int render_deco_height(void) {
-    int deco_height = config.font.height + 4;
+    int deco_height = config.font.height + 16;
     if (config.font.height & 0x01) {
         ++deco_height;
     }
@@ -424,7 +424,7 @@ static void render_con_split(Con *con, Con *child, render_params *p, int i) {
             child->deco_rect.y = 0;
 
             child->deco_rect.width = child->rect.width;
-            child->deco_rect.height = p->deco_height;
+            child->deco_rect.height = p->deco_height - 4;
         } else {
             child->deco_rect.x = 0;
             child->deco_rect.y = 0;
@@ -443,7 +443,7 @@ static void render_con_stacked(Con *con, Con *child, render_params *p, int i) {
     child->rect.height = p->rect.height;
 
     child->deco_rect.x = p->x - con->rect.x;
-    child->deco_rect.y = p->y - con->rect.y + (i * p->deco_height);
+    child->deco_rect.y = p->y - con->rect.y + (i * p->deco_height) + 4;
     child->deco_rect.width = child->rect.width;
     child->deco_rect.height = p->deco_height;
 
@@ -472,8 +472,8 @@ static void render_con_tabbed(Con *con, Con *child, render_params *p, int i) {
     }
 
     if (p->children > 1 || (child->border_style != BS_PIXEL && child->border_style != BS_NONE)) {
-        child->rect.y += p->deco_height;
-        child->rect.height -= p->deco_height;
+        child->rect.y += p->deco_height + 4;
+        child->rect.height -= p->deco_height + 4;
         child->deco_rect.height = p->deco_height;
     } else {
         child->deco_rect.height = (child->border_style == BS_PIXEL ? 1 : 0);
